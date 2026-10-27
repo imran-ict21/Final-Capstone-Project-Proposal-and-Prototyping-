@@ -1,0 +1,26 @@
+gantt
+    title Daily Expense & Personal Finance Dashboard — Illustrative 8-Week Plan
+    dateFormat YYYY-MM-DD
+    axisFormat %d %b
+    excludes weekends
+
+    section Analysis and Design
+    Scope and requirements baseline :a1, 2026-11-02, 5d
+    Proposal and process model      :a2, after a1, 4d
+    Six diagrams and architecture  :a3, after a1, 5d
+
+    section Prototype
+    UI layout and domain model      :b1, after a3, 3d
+    Dashboard and transaction form :b2, after b1, 4d
+    Calendar and daily view        :b3, after b2, 3d
+    Validation and CSV export      :b4, after b2, 2d
+
+    section Full Implementation
+    MySQL persistence               :c1, after b3, 4d
+    Authentication and authorization :c2, after c1, 4d
+    Filters and XLSX reporting      :c3, after c1, 3d
+
+    section Verification and Release
+    Testing and fixes               :d1, after c2, 4d
+    Documentation and diagram review :d2, after d1, 2d
+    GitHub cleanup and submission   :d3, after d2, 2d

@@ -1,0 +1,16 @@
+flowchart TD
+    A([Start]) --> B[Open transaction form]
+    B --> C[Choose Income or Expense]
+    C --> D[Enter amount, date, category, description]
+    D --> E{Required fields valid?}
+    E -- No --> F[Show validation errors]
+    F --> D
+    E -- Yes --> G{Amount greater than zero?}
+    G -- No --> H[Show amount error]
+    H --> D
+    G -- Yes --> I[Submit transaction]
+    I --> J[Service validates business rules]
+    J --> K[Save transaction]
+    K --> L[Recalculate dashboard totals and balance]
+    L --> M[Refresh selected date and transaction list]
+    M --> N([End])

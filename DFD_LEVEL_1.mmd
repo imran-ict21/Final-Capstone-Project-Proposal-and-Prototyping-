@@ -1,0 +1,30 @@
+flowchart LR
+    U[User]
+    P1((1.0 Authenticate User))
+    P2((2.0 Manage Wallet))
+    P3((3.0 Manage Transactions))
+    P4((4.0 Build Dashboard and Calendar))
+    P5((5.0 Generate Report))
+    D1[(D1 User)]
+    D2[(D2 Wallet)]
+    D3[(D3 Category)]
+    D4[(D4 Transaction)]
+    X[CSV / XLSX File]
+
+    U -->|Email and password| P1
+    P1 <--> D1
+    P1 -->|Session / result| U
+    U -->|Wallet and transaction actions| P2
+    P2 <--> D2
+    U -->|Income / expense details| P3
+    P3 <--> D3
+    P3 <--> D4
+    P3 -->|Saved / validation result| U
+    U -->|Month or date selection| P4
+    P4 --> D2
+    P4 --> D4
+    P4 -->|Balance, totals, daily records| U
+    U -->|Export period| P5
+    P5 --> D4
+    P5 -->|Report rows| X
+    X -->|Download| U

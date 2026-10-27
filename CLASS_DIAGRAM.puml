@@ -1,0 +1,91 @@
+@startuml
+title Daily Expense & Personal Finance Dashboard — Class Diagram
+skinparam classAttributeIconSize 0
+
+class User {
+  -Long userId
+  -String fullName
+  -String email
+  -String passwordHash
+  +getDisplayName(): String
+}
+
+class Wallet {
+  -Long walletId
+  -Long userId
+  -String walletName
+  -BigDecimal openingBalance
+  +calculateBalance(income: BigDecimal, expense: BigDecimal): BigDecimal
+}
+
+abstract class Transaction {
+  -Long transactionId
+  -BigDecimal amount
+  -LocalDate transactionDate
+  -String category
+  -String description
+  +getType(): String
+}
+
+class Income {
+  +getType(): String
+}
+
+class Expense {
+  +getType(): String
+}
+
+class Category {
+  -Long categoryId
+  -String name
+  -String type
+}
+
+class TransactionService {
+  +addTransaction(transaction: Transaction): void
+  +getTransactionsForDate(date: LocalDate): List
+  +getAllTransactions(): List
+}
+
+class WalletService {
+  +getCurrentBalance(): BigDecimal
+}
+
+class DashboardService {
+  +getMonthlyIncome(month: YearMonth): BigDecimal
+  +getMonthlyExpenses(month: YearMonth): BigDecimal
+  +getMonthlyNet(month: YearMonth): BigDecimal
+}
+
+class CalendarService {
+  +getTransactionsForDate(date: LocalDate): List
+}
+
+class HomeController {
+  +showDashboard(): String
+  +addTransaction(form): String
+  +downloadCsv(): Response
+}
+
+class TransactionRepository {
+  +findAll(): List
+  +save(transaction: Transaction): void
+}
+
+User "1" -- "1" Wallet : owns
+User "1" -- "0..*" Transaction : records
+Wallet "1" -- "0..*" Transaction : contains
+Category "1" -- "0..*" Transaction : classifies
+Transaction <|-- Income
+Transaction <|-- Expense
+TransactionService --> TransactionRepository
+TransactionService --> Transaction
+WalletService --> Wallet
+WalletService --> TransactionService
+DashboardService --> TransactionService
+CalendarService --> TransactionService
+HomeController --> TransactionService
+HomeController --> WalletService
+HomeController --> DashboardService
+HomeController --> CalendarService
+@enduml

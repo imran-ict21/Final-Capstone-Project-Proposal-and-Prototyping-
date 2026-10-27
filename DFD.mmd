@@ -1,0 +1,7 @@
+flowchart TD
+    U[User] -->|Credentials / transaction input / filters| S((Daily Expense & Finance Dashboard))
+    S -->|Dashboard / calendar / reports / validation feedback| U
+    S <--> |User profile and authentication data| D1[(User Store)]
+    S <--> |Wallet and transaction records| D2[(Finance Data Store)]
+    S -->|Selected-period report data| E[CSV / XLSX Export]
+    E -->|Download file| U

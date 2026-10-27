@@ -1,0 +1,38 @@
+erDiagram
+    USER ||--|| WALLET : owns
+    USER ||--o{ TRANSACTION : records
+    WALLET ||--o{ TRANSACTION : contains
+    CATEGORY ||--o{ TRANSACTION : classifies
+
+    USER {
+      bigint user_id PK
+      varchar full_name
+      varchar email UK
+      varchar password_hash
+      datetime created_at
+    }
+    WALLET {
+      bigint wallet_id PK
+      bigint user_id FK,UK
+      varchar wallet_name
+      decimal opening_balance
+      datetime created_at
+    }
+    CATEGORY {
+      bigint category_id PK
+      bigint owner_user_id FK "nullable for defaults"
+      varchar name
+      varchar type "INCOME or EXPENSE"
+    }
+    TRANSACTION {
+      bigint transaction_id PK
+      bigint user_id FK
+      bigint wallet_id FK
+      bigint category_id FK
+      varchar type "INCOME or EXPENSE"
+      decimal amount
+      date transaction_date
+      varchar description
+      datetime created_at
+      datetime updated_at
+    }

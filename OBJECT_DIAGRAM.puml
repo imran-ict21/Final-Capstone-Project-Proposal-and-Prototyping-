@@ -1,0 +1,48 @@
+@startuml
+title Object Diagram — Example Snapshot on 2026-11-05
+skinparam objectAttributeIconSize 0
+
+object "user1:User" as u1 {
+  userId = 101
+  fullName = "Alex Morgan"
+  email = "alex@example.com"
+}
+
+object "wallet1:Wallet" as w1 {
+  walletId = 501
+  walletName = "Personal Wallet"
+  openingBalance = 1000.00
+}
+
+object "income1:Income" as i1 {
+  transactionId = 9001
+  amount = 25000.00
+  transactionDate = 2026-11-01
+  category = "Salary"
+  description = "Monthly salary"
+}
+
+object "expense1:Expense" as e1 {
+  transactionId = 9002
+  amount = 300.00
+  transactionDate = 2026-11-05
+  category = "Transportation"
+  description = "Bus and rickshaw"
+}
+
+object "expense2:Expense" as e2 {
+  transactionId = 9003
+  amount = 200.00
+  transactionDate = 2026-11-05
+  category = "Food & Dining"
+  description = "Lunch"
+}
+
+u1 -- w1 : owns
+u1 -- i1 : records
+u1 -- e1 : records
+u1 -- e2 : records
+w1 -- i1 : contains
+w1 -- e1 : contains
+w1 -- e2 : contains
+@enduml
